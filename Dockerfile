@@ -1,7 +1,11 @@
 FROM python:3.8.3
 
+
 RUN pip install -U pip && \
-   mkdir /src
+   mkdir /src \
+   mkdir /root/.kaggle
+   
+COPY kaggle.json /root/.kaggle
 
 WORKDIR /src
 

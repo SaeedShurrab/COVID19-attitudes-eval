@@ -10,7 +10,7 @@ tqdm.pandas()
 raw_dir = os.path.join(os.curdir,'data','raw')
 intermediate_dir = os.path.join(os.curdir,'data','intermediate')
 preprocessed_dir = os.path.join(os.curdir,'data','preprocessed')
-plots_dir = os.path.join((os.curdir,'plots')
+plots_dir = os.path.join(os.curdir,'plots')
 
 data = pd.read_csv(os.path.join(raw_dir,'US COVID-19 Tweets.csv'))
 
@@ -18,18 +18,28 @@ data = data[['text','datetime','hashtags']]
 
 # Apply Cleaning
 data['clean_text']=data['text'].progress_apply(lambda x: process_all_text(x))
+print('cleaning completed \n')
 
 # Apply stemming
 data['clean_stemmed']=data['clean_text'].progress_apply(lambda x: stem_tweet(x))
+print('stemming completed \n')
+
+# Calculate polarity
+data['polarity']=data['clean_stemmed'].progress_apply(lambda x: get_polarity(x))
+print('polarity calculation completed \n')
 
 # Extract Label
 data['label']=data['polarity'].progress_apply(lambda x: get_label(x))
+print('labelling completed \n')
 
 # Tweet language detection
 data['language']=data['clean_text'].progress_apply(lambda x: detect_lang(x))
+print('language detection completed \n')
 
 # Tweet Length Extraction
 data['length']=data['clean_stemmed'].progress_apply(lambda x: twt_len(x))
+print('tweets length calculation completed \n')
+
 
 # Non-English tweets removal 
 data = data[data.language == 'en']
@@ -70,3 +80,5 @@ data.to_csv(os.path.join(intermediate_dir,'cleaned_data.csv'))
 feb_tweets.to_csv(os.path.join(preprocessed_dir,'feb_tweets.csv'))
 mar_tweets.to_csv(os.path.join(preprocessed_dir,'mar_tweets.csv'))
 apr_tweets.to_csv(os.path.join(preprocessed_dir,'apr_tweets.csv'))
+
+print('preprocessing completed \n')

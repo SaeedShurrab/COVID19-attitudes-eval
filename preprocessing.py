@@ -21,6 +21,7 @@ data = pd.read_csv(os.path.join(raw_dir,'US COVID-19 Tweets.csv'))
 data = data[['text','datetime','hashtags']]
 
 
+
 # Apply Cleaning
 data['clean_text']=data['text'].progress_apply(lambda x: process_all_text(x))
 print('cleaning completed \n')

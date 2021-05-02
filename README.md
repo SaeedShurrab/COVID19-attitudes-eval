@@ -28,6 +28,7 @@ USA is among the countries that have been considerably affected by the COVID-19 
 
 ## Citation:
 
+If this code is useful for your research, please consider citing:
 ```
 
 ```

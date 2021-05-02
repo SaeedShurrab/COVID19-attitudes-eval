@@ -1,6 +1,5 @@
 
 import re
-import nltk
 from nltk.stem import PorterStemmer
 from langdetect import detect
 from langdetect.lang_detect_exception import LangDetectException

@@ -1,8 +1,12 @@
 import os
+import nltk
 import datetime
 import pandas as pd 
+import matplotlib.pyplot as plt
 from tqdm import tqdm
 from src.utils import *
+
+
 
 nltk.download('vader_lexicon')
 tqdm.pandas()
@@ -15,6 +19,7 @@ plots_dir = os.path.join(os.curdir,'plots')
 data = pd.read_csv(os.path.join(raw_dir,'US COVID-19 Tweets.csv'))
 
 data = data[['text','datetime','hashtags']]
+
 
 # Apply Cleaning
 data['clean_text']=data['text'].progress_apply(lambda x: process_all_text(x))

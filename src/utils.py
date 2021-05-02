@@ -6,7 +6,7 @@ from langdetect import detect
 from langdetect.lang_detect_exception import LangDetectException
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
-nltk.download('vader_lexicon')
+
 
 
 

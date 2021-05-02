@@ -4,7 +4,7 @@ import pandas as pd
 from tqdm import tqdm
 from src.utils import *
 
-
+nltk.download('vader_lexicon')
 tqdm.pandas()
 
 raw_dir = os.path.join(os.curdir,'data','raw')

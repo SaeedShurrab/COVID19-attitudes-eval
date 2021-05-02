@@ -1,5 +1,8 @@
 import os
-import zipfile
+import kaggle
+from zipfile import ZipFile
+from kaggle.api.kaggle_api_extended import KaggleApi
+
 
 data_dir = 'data'
 sub_dirs = ['raw','intermediate','preprocessed']
@@ -10,31 +13,29 @@ sub_dirs = ['raw','intermediate','preprocessed']
 try:
     os.mkdir(data_dir)
 except:
-    print(f'{data_dir} directory exists!!')
+    print(f'{data_dir} directory exists!! \n')
 
 
 for dir in sub_dirs:
     try:
         os.mkdir(os.path.join(os.curdir,data_dir,dir))
     except:
-        print(f'{dir} directory exists!!')
+        print(f'{dir} directory exists!! \n')
 
 
 
+api = KaggleApi()
+api.authenticate()
 
 
-#UN data download
-#UN_URL = 'https://justdata91.s3.us-east-2.amazonaws.com/UNv1.0.ar-en.ar.tar.xz'
-#response = requests.get(UN_URL)
-#UN_dir = os.path.join(raw_dir,data_sources[0])
+api.dataset_download_files('yazanshannak/us-covid-tweets')
 
-#if response.status_code == 200:
-#    with open(os.path.join(UN_dir,'UNv1.0.ar-en.ar.tar.xz'), "wb+") as file:
-#        file.write(response.content)
-#        print("Download completed")
-#else:
-#    print("Download Failed!!")
+print(f'download completed \n')
 
-#with tarfile.open(os.path.join(UN_dir,'UNv1.0.ar-en.ar.tar.xz'),'r') as archive:
-#    archive.extractall(UN_dir)
-#    os.remove(os.path.join(UN_dir,'UNv1.0.ar-en.ar.tar.xz'))
+with ZipFile('us-covid-tweets.zip', 'r') as arch:
+    arch.extractall(os.path.join('.','data','raw'))
+
+
+os.remove('us-covid-tweets.zip')
+
+print('Raw data at your service  \n')

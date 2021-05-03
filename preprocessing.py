@@ -20,10 +20,6 @@ data = pd.read_csv(os.path.join(raw_dir,'US COVID-19 Tweets.csv'))
 
 data = data[['text','datetime','hashtags']]
 
-import numpy as np
-idx = np.arange(data.shape[0])
-np.random.shuffle(idx)
-data = data.iloc[0:13000]
 
 # Apply Cleaning
 data['clean_text']=data['text'].progress_apply(lambda x: process_all_text(x))
@@ -84,10 +80,10 @@ feb_tweets = data[data.month == 2]
 mar_tweets = data[data.month == 3]
 apr_tweets = data[data.month == 4]
 
-data.to_csv(os.path.join(intermediate_dir,'cleaned_data.csv'))
+data.to_pickle(os.path.join(intermediate_dir,'cleaned_data.pkl'))
 
-feb_tweets.to_csv(os.path.join(preprocessed_dir,'feb_tweets.csv'))
-mar_tweets.to_csv(os.path.join(preprocessed_dir,'mar_tweets.csv'))
-apr_tweets.to_csv(os.path.join(preprocessed_dir,'apr_tweets.csv'))
+feb_tweets.to_pickle(os.path.join(preprocessed_dir,'feb_tweets.pkl'))
+mar_tweets.to_pickle(os.path.join(preprocessed_dir,'mar_tweets.pkl'))
+apr_tweets.to_pickle(os.path.join(preprocessed_dir,'apr_tweets.pkl'))
 
 print('preprocessing completed \n')

@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from src.utils import plot_sentiment, font
-import warnings
+
 
 preprocessed_dir = os.path.join(os.curdir,'data','preprocessed')
 plots_dir = os.path.join(os.curdir,'plots')

@@ -122,7 +122,7 @@ def detect_lang(text:str) -> str:
 def twt_len(text: str) -> int:
     return len(text.split())
 
-
+#sentiment plotting function
 def plot_sentiment(days, cases, death, recovered, positive, negative, nuetral, path):
 
     fig = plt.figure(figsize=(5,7))
@@ -153,3 +153,18 @@ def plot_sentiment(days, cases, death, recovered, positive, negative, nuetral, p
     plt.savefig(path,dpi =600)
     plt.show()
 
+# most frequent topic words extraction function
+def most_freq_topic_words(lda_model : sklearn.decomposition._lda.LatentDirichletAllocation,
+                          vectorizer : sklearn.feature_extraction.text.TfidfVectorizer,
+                          n_words : int) -> pd.DataFrame:
+    keywords = np.array(vectorizer.get_feature_names())
+    topic_keywords = []
+
+    for topic_weights in lda_model.components_:
+        top_keyword_locs = (-topic_weights).argsort()[:n_words]
+        topic_keywords.append(keywords.take(top_keyword_locs))
+
+    df_topic_keywords = pd.DataFrame(topic_keywords)
+    df_topic_keywords.columns = ['Word '+str(i) for i in range(df_topic_keywords.shape[1])]
+    df_topic_keywords.index = ['Topic '+str(i) for i in range(df_topic_keywords.shape[0])]
+    return df_topic_keywords.T

@@ -1,11 +1,18 @@
 
 import re
-from nltk.stem import PorterStemmer
+import os
+import matplotlib.pyplot as plt
 from langdetect import detect
+from nltk.stem import PorterStemmer
 from langdetect.lang_detect_exception import LangDetectException
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
-
+# font specifications
+font = {'family': 'Times New Roman',
+        'color':  'k',
+        'weight': 'normal',
+        'size':8
+        }
 
 
 
@@ -116,9 +123,33 @@ def twt_len(text: str) -> int:
     return len(text.split())
 
 
-# font specifications
-font = {'family': 'Times New Roman',
-        'color':  'k',
-        'weight': 'normal',
-        'size':8
-        }
+def plot_sentiment(days, cases, death, recovered, positive, negative, nuetral, path):
+
+    fig = plt.figure(figsize=(5,7))
+    sub1 = fig.add_subplot(2,1,1)
+    sub1.plot(days,cases,'r-*',
+             days,death,'k-*',
+             days,recovered,'g-*')
+
+    sub1.set_xticklabels(())
+    sub1.set_title("Number of COVID-19 Cases",loc = 'center',fontdict=font)
+    sub1.set_ylabel('Number of Cases',fontdict=font)
+    sub1.legend(['Confirmed','Death','Recovered'],loc ='upper left',prop={'size': 7})
+    sub1.grid()
+
+    sub2 = fig.add_subplot(2,1,2)
+    sub2.plot(days,positive,'g-*',
+              days,negative,'r-*',
+              days,nuetral,'k-*'
+              )  
+    sub2.set_xticklabels(days, rotation=60)
+    sub2.set_title("Sentiment Labels Frequency",loc = 'center',fontdict=font)  
+    sub2.set_ylabel('Number of Tweets',fontdict=font)
+    sub2.set_xlabel('Days',fontdict=font)  
+    sub2.legend(['Positive','Negative','Neutral'],loc ='upper left',prop={'size': 7})
+    sub2.grid()
+
+    plt.tight_layout()
+    plt.savefig(path,dpi =600)
+    plt.show()
+

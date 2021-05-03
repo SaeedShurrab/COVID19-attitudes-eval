@@ -6,9 +6,9 @@ from src.utils import plot_sentiment
 preprocessed_dir = os.path.join(os.curdir,'data','preprocessed')
 plots_dir = os.path.join(os.curdir,'plots')
 
-feb_tweets = pd.read_csv(os.path.join(preprocessed_dir,'feb_tweets.csv'))
-mar_tweets = pd.read_csv(os.path.join(preprocessed_dir,'mar_tweets.csv'))
-apr_tweets = pd.read_csv(os.path.join(preprocessed_dir,'apr_tweets.csv'))
+feb_tweets = pd.read_csv(os.path.join(preprocessed_dir,'feb_tweets.csv'),index_col=0)
+mar_tweets = pd.read_csv(os.path.join(preprocessed_dir,'mar_tweets.csv'),index_col=0)
+#apr_tweets = pd.read_csv(os.path.join(preprocessed_dir,'apr_tweets.csv'),index_col=0)
 
 # COVID -19 Confirmed Cases 1/Feb. - 29/Apr.
 
@@ -55,13 +55,13 @@ apr_rec = [1450, 527, 706, 4945, 2796, 2133, 2182, 1796, 1851, 3380, 2480, 1718,
 
 feb_tweets['day'] = pd.DatetimeIndex(feb_tweets['datetime']).day
 mar_tweets['day'] = pd.DatetimeIndex(mar_tweets['datetime']).day
-apr_tweets['day'] = pd.DatetimeIndex(apr_tweets['datetime']).day
+#apr_tweets['day'] = pd.DatetimeIndex(apr_tweets['datetime']).day
 
 
 # Sentimet frequency per month extraction
 feb_freq = list(feb_tweets.groupby(['label','day'])['day'].count().to_dict().values())
 mar_freq = list(mar_tweets.groupby(['label','day'])['day'].count().to_dict().values())
-apr_freq = list(apr_tweets.groupby(['label','day'])['day'].count().to_dict().values())
+#apr_freq = list(apr_tweets.groupby(['label','day'])['day'].count().to_dict().values())
 
 feb_nuet = feb_freq[0:29]
 feb_neg = feb_freq[29:58]
@@ -71,9 +71,9 @@ mar_nuet = mar_freq[0:31]
 mar_neg = mar_freq[31:62]
 mar_pos = mar_freq[62:]
 
-apr_nuet = apr_freq[0:29]
-apr_neg = apr_freq[29:58]
-apr_pos = apr_freq[58:]
+#apr_nuet = apr_freq[0:29]
+#apr_neg = apr_freq[29:58]
+#apr_pos = apr_freq[58:]
 
 
 # Tweets sentiment associated with number of COVID-19 cases in February. 
@@ -100,12 +100,12 @@ plot_sentiment(mar_days,
 
 
 # Tweets sentiment associated with number of COVID-19 cases in April. 
-plot_sentiment(apr_days,
-               apr_cases, 
-               apr_death,
-               apr_rec,
-               apr_pos,
-               apr_neg,
-               apr_nuet,
-               os.path.join(plots_dir,'apr_sent.jpg'))
+#plot_sentiment(apr_days,
+#               apr_cases, 
+#               apr_death,
+#               apr_rec,
+#               apr_pos,
+#               apr_neg,
+#               apr_nuet,
+#               os.path.join(plots_dir,'apr_sent.jpg'))
 

@@ -20,7 +20,10 @@ data = pd.read_csv(os.path.join(raw_dir,'US COVID-19 Tweets.csv'))
 
 data = data[['text','datetime','hashtags']]
 
-
+import numpy as np
+idx = np.arange(data.shape[0])
+np.random.shuffle(idx)
+data = data.iloc[0:13000]
 
 # Apply Cleaning
 data['clean_text']=data['text'].progress_apply(lambda x: process_all_text(x))

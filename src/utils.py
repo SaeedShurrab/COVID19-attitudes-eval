@@ -1,6 +1,9 @@
 
 import re
 import os
+import sklearn
+import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 from langdetect import detect
 from nltk.stem import PorterStemmer

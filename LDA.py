@@ -9,7 +9,7 @@ import warnings
 warnings.filterwarnings("ignore")
 
 preprocessed_dir = os.path.join(os.curdir,'data','preprocessed')
-plots_dir = os.path.join(os.curdir,'plots')
+tables_dir = os.path.join(os.curdir,'tables')
 
 feb_tweets = pd.read_pickle(os.path.join(preprocessed_dir,'feb_tweets.pkl'))
 mar_tweets = pd.read_pickle(os.path.join(preprocessed_dir,'mar_tweets.pkl'))
@@ -158,19 +158,19 @@ print('April negative topic modelling completed')
 
 
 fp = most_freq_topic_words(lda_model_fp,vectorizer_fp,10)
-fp.to_csv('/content/drive/My Drive/final_analytics/fp.csv')
+fp.to_csv(os.path.join(tables_dir,'most-frequent-positive-words-February'))
 
 fn = most_freq_topic_words(lda_model_fn,vectorizer_fn,10)
-fn.to_csv('/content/drive/My Drive/final_analytics/fn.csv')
+fn.to_csv(os.path.join(tables_dir,'most-frequent-negative-words-February'))
 
 mp = most_freq_topic_words(lda_model_mp,vectorizer_mp,10)
-mp.to_csv('/content/drive/My Drive/final_analytics/mp.csv')
+mp.to_csv(os.path.join(tables_dir,'most-frequent-positive-words-March'))
 
 mn = most_freq_topic_words(lda_model_mn,vectorizer_mn,10)
-mn.to_csv('/content/drive/My Drive/final_analytics/mn.csv')
+mn.to_csv(os.path.join(tables_dir,'most-frequent-negative-words-March'))
 
 ap = most_freq_topic_words(lda_model_ap,vectorizer_ap,10)
-ap.to_csv('/content/drive/My Drive/final_analytics/ap.csv')
+ap.to_csv(os.path.join(tables_dir,'most-frequent-positive-words-April'))
 
 an = most_freq_topic_words(lda_model_an,vectorizer_an,10)
-an.to_csv('/content/drive/My Drive/final_analytics/an.csv')
+an.to_csv(os.path.join(tables_dir,'most-frequent-negative-words-April'))

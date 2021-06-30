@@ -30,6 +30,14 @@ USA is among the countries that have been considerably affected by the COVID-19 
 
 If this code is useful for your research, please consider citing:
 ```
-
+@INPROCEEDINGS{9464558,
+  author={Shurrab, Saeed and Shannak, Yazan and Almshnanah, Abdulkarem and Khazaleh, Huthaifa and Najadat, Hassan},
+  booktitle={2021 12th International Conference on Information and Communication Systems (ICICS)}, 
+  title={Attitudes Evaluation Toward COVID-19 Pandemic: An Application of Twitter Sentiment Analysis and Latent Dirichlet Allocation}, 
+  year={2021},
+  volume={},
+  number={},
+  pages={265-272},
+  doi={10.1109/ICICS52457.2021.9464558}}
 ```
 
